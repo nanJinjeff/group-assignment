@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Study"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/Study" />
+
+    <item
+        android:id="@+id/Quiz"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/Quiz" />
+    <item
+        android:id="@+id/Level"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/Level" />
+    <item
+        android:id="@+id/Note"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/Note" />
+    </menu>
