@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 public class Quiz2 extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class Quiz2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.quiz);
+        setContentView(R.layout.quiz2);
 
         RadioGroup radioGroup1 = findViewById(R.id.radioGroup);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -105,7 +106,13 @@ public class Quiz2 extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ScoreDatabase scoreDatabase = Room.databaseBuilder(v.getContext(), ScoreDatabase.class, "database_score").allowMainThreadQueries()
+                        .build();
+                Score scoreData = new Score();
                 int scoreTotal = score[0]+score[1]+score[2]+score[3]+score[4];
+                scoreData.setScore(scoreTotal);
+                scoreData.setQuestiontype("True or False");
+                scoreDatabase.getScoreDao().insertScore(scoreData);
                 Intent intent = new Intent(v.getContext(), GetTheScore.class);
                 intent.putExtra("score", scoreTotal);
                 v.getContext().startActivity(intent);

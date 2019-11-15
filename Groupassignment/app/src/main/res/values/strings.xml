@@ -27,4 +27,5 @@
     <string name="back">Back</string>
     <string name="trueChoice">true</string>
     <string name="falseChoice">false</string>
+    <string name="share">Share</string>
 </resources>

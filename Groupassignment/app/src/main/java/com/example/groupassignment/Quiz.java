@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 public class Quiz extends AppCompatActivity {
 
@@ -72,10 +73,10 @@ public class Quiz extends AppCompatActivity {
                 Toast.makeText(group.getContext(), "you have chosen "+ radioButton.getText(), Toast.LENGTH_LONG ).show();
                 switch (checkedId){
                     case R.id.radioButton9:
-                        score[2] = 1;
+                        score[2] = 0;
                         break;
                     case R.id.radioButton10:
-                        score[2] = 0;
+                        score[2] = 1;
                         break;
                     case R.id.radioButton11:
                         score[2] = 0;
@@ -135,7 +136,13 @@ public class Quiz extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ScoreDatabase scoreDatabase = Room.databaseBuilder(v.getContext(), ScoreDatabase.class, "database_score").allowMainThreadQueries()
+                        .build();
+                Score scoreData = new Score();
                 int scoreTotal = score[0]+score[1]+score[2]+score[3]+score[4];
+                scoreData.setScore(scoreTotal);
+                scoreData.setQuestiontype("Multiple choice");
+                scoreDatabase.getScoreDao().insertScore(scoreData);
                 Intent intent = new Intent(v.getContext(), GetTheScore.class);
                 intent.putExtra("score", scoreTotal);
                 v.getContext().startActivity(intent);

@@ -19,6 +19,7 @@
         <activity android:name=".DogDescription"></activity>
         <activity android:name=".Quiz"></activity>
         <activity android:name=".GetTheScore"></activity>
+        <activity android:name=".Quiz2"></activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

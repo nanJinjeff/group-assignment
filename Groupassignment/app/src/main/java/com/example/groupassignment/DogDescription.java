@@ -1,22 +1,17 @@
 package com.example.groupassignment;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Insert;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -45,26 +40,19 @@ public class DogDescription extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dog_description);
 
-        final Intent intent = getIntent();
-        final int dogNum = intent.getIntExtra("dogNum", 0);
-        final String dogName = intent.getStringExtra("dogName");
-
+         Intent intent = getIntent();
+         int dogNum = intent.getIntExtra("dogNum", 0);
+         String dogName = intent.getStringExtra("dogName");
 
         imageView3 = findViewById(R.id.imageView3);
         textView9 = findViewById(R.id.textView9);
-
         textView13 = findViewById(R.id.textView13);
         textView15 = findViewById(R.id.textView15);
-
-
         textView11 = findViewById(R.id.textView11);
         textView17 = findViewById(R.id.textView17);
-
         textView19 = findViewById(R.id.textView19);
-
         button6 = findViewById(R.id.button6);
         editText24 = findViewById(R.id.editText24);
-
         button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -83,37 +71,19 @@ public class DogDescription extends AppCompatActivity{
             }
         });
 
-        String url = "https://api.TheDogApi.com/v1/breeds";
+        DogDatabase dogDB = Room.databaseBuilder(this, DogDatabase.class, "database_dog").allowMainThreadQueries()
+                .build();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                final Gson gson = new Gson();
-                Dog[] objectsArray = gson.fromJson(response, Dog[].class);
-                final List<Dog> objectsList = Arrays.asList(objectsArray);
-
-
-
-                textView9.setText(objectsList.get(dogNum).getName());
-                textView13.setText(objectsList.get(dogNum).getOrigin());
-                textView15.setText(objectsList.get(dogNum).getLife_span());
-                textView11.setText(objectsList.get(dogNum).getBred_for());
-                textView17.setText(objectsList.get(dogNum).getBreed_group());
-                textView19.setText(objectsList.get(dogNum).getTemperament());
-
-            }
-        };
-
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("The request failed.");
-            }
-        };
-
-
+                textView9.setText( dogDB.dogDao().getAllDogs().get(dogNum).getName());
+                if(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin() == null){
+                    textView13.setText("unknown");
+                }else {
+                    textView13.setText(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin());
+                }
+                textView15.setText( dogDB.dogDao().getAllDogs().get(dogNum).getLife_span());
+                textView11.setText( dogDB.dogDao().getAllDogs().get(dogNum).getBred_for());
+                textView17.setText( dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group());
+                textView19.setText( dogDB.dogDao().getAllDogs().get(dogNum).getTemperament());
 
         final String search = "https://en.wikipedia.org/wiki/"+ dogName;
         button6.setText(search);
@@ -126,6 +96,7 @@ public class DogDescription extends AppCompatActivity{
             }
         });
 
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         Intent intent1 = getIntent();
         String urlID = String.valueOf(intent1.getIntExtra("urlID", 0));
@@ -142,7 +113,6 @@ public class DogDescription extends AppCompatActivity{
                      Glide.with(getApplicationContext()).load(objectsImageList.get(0).getUrl()).into(imageView3);
                  }
              }
-
          };
 
              Response.ErrorListener errorListener1 = new Response.ErrorListener() {
@@ -152,9 +122,7 @@ public class DogDescription extends AppCompatActivity{
                  }
              };
 
-             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
              StringRequest stringRequest1 = new StringRequest(Request.Method.GET, urlImage, responseListener1, errorListener1);
-             requestQueue.add(stringRequest);
              requestQueue.add(stringRequest1);
 
          }

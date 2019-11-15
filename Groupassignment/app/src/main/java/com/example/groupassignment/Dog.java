@@ -3,8 +3,10 @@ package com.example.groupassignment;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+@Entity
 public class Dog {
 
+    @PrimaryKey
         int id;
         String name;
         String bred_for;

@@ -9,7 +9,7 @@
     <View
         android:id="@+id/divider7"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="15dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -17,6 +17,8 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/Topic"
+        android:background="@drawable/text_style"
+        android:textColor="@color/textcolor"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <View
@@ -31,12 +33,21 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/Content"
+        android:background="@drawable/text_style"
+        android:textColor="@color/textcolor"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <View
+        android:id="@+id/divider17"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
         android:layout_gravity="center"
-        android:text="@string/remove" />
+        android:background="@drawable/text_style"
+        android:text="@string/remove"
+        android:textColor="@color/textcolor" />
 </LinearLayout>

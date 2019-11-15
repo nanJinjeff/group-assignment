@@ -1,6 +1,5 @@
 package com.example.groupassignment;
 
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,14 +26,19 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class StudyFragment extends Fragment {
+public class StudyFragment extends Fragment implements AsyncTaskDelegate {
     RecyclerView recyclerView1;
     public SearchView searchView;
 
     @Override
+    public void handleTaskResult(String result){
+        Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_study, container, false);
+        final View view = inflater.inflate(R.layout.fragment_study, container, false);
 
 
         searchView = view.findViewById(R.id.searchView);
@@ -44,11 +49,12 @@ public class StudyFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView1.setLayoutManager(linearLayoutManager);
 
+        final String url = "https://api.TheDogApi.com/v1/breeds?";
+        final RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
 
-        String url = "https://api.TheDogApi.com/v1/breeds?";
-        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        final StudyFragment studyFragment = this;
 
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
+        final Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -56,41 +62,49 @@ public class StudyFragment extends Fragment {
                 Dog[] objectsArray = gson.fromJson(response, Dog[].class);
                 final List<Dog> objectsList = Arrays.asList(objectsArray);
 
-                DogViewAdapter catViewAdapter = new DogViewAdapter(objectsList);
+                final DogDatabase dogDB = Room.databaseBuilder(view.getContext(), DogDatabase.class, "database_dog").allowMainThreadQueries()
+                        .build();
+
+                Dog[] dogArray = objectsList.toArray(new Dog[objectsList.size()]);
+
+                InsertDogAsyncTask insertDogAsyncTask = new InsertDogAsyncTask();
+                insertDogAsyncTask.setDatabase(dogDB);
+                insertDogAsyncTask.setDelegate(studyFragment);
+                insertDogAsyncTask.execute(dogArray);
+
+                DogViewAdapter catViewAdapter = new DogViewAdapter(dogDB.dogDao().getAllDogs());
                 recyclerView1.setAdapter(catViewAdapter);
 
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
-                        DogViewAdapter dogViewAdapter = new DogViewAdapter(getDogList(query, objectsList));
+                        DogViewAdapter dogViewAdapter = new DogViewAdapter(getDogList(query, dogDB.dogDao().getAllDogs()));
                         recyclerView1.setAdapter(dogViewAdapter);
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        DogViewAdapter dogViewAdapter = new DogViewAdapter(getDogList(newText,objectsList));
+                        DogViewAdapter dogViewAdapter = new DogViewAdapter(getDogList(newText, dogDB.dogDao().getAllDogs()));
                         recyclerView1.setAdapter(dogViewAdapter);
                         return false;
                     }
                 });
-
-            }
-
-        };
-
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("The request failed.");
             }
         };
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
 
-        requestQueue.add(stringRequest);
+                Response.ErrorListener errorListener = new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("The request failed.");
+                    }
+                };
 
-        return view;
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
+                requestQueue.add(stringRequest);
+
+            return view;
     }
 
     public ArrayList<Dog> getDogList(String input, List<Dog> list){

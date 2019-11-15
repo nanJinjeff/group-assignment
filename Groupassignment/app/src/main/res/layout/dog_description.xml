@@ -32,6 +32,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/DogName"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
@@ -56,8 +57,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/Origin"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -78,8 +85,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/LifeSpan"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -100,8 +113,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/bred_for"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -122,8 +141,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/breed_group"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider14"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -144,8 +169,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/Temperament"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider15"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -166,14 +197,22 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_style"
                 android:text="@string/wikipedia"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/textcolor" />
+
+            <View
+                android:id="@+id/divider16"
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
 
             <Button
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/dialog_holo_light_frame" />
+                android:background="@drawable/text_style"
+                android:textColor="@color/textcolor"
+                />
 
             <View
                 android:id="@+id/divider9"
@@ -195,6 +234,9 @@
                     android:layout_marginBottom="25dp"
                     android:gravity="center"
                     android:text="@string/Note"
+                    android:textStyle="bold"
+                    android:background="@drawable/text_style"
+                    android:textColor="@color/textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintBottom_toTopOf="@+id/editText24"
                     app:layout_constraintEnd_toEndOf="parent"
