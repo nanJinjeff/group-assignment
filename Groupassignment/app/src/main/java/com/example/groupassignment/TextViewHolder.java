@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.groupassignment.R;
+
 public class TextViewHolder extends RecyclerView.ViewHolder {
     TextView textView3;
     TextView textView5;

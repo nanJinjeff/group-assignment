@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -20,7 +21,7 @@
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="55dp"
@@ -37,6 +38,12 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/azawakh" />
 
                     <RadioButton
                         android:id="@+id/radioButton"
@@ -55,7 +62,7 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="55dp"
@@ -66,12 +73,18 @@
 
                 <RadioGroup
                     android:id="@+id/radioGroup2"
-                    android:layout_width="163dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/barbet" />
 
                     <RadioButton
                         android:id="@+id/radioButton5"
@@ -90,7 +103,7 @@
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     android:text="TextView"
@@ -105,6 +118,12 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView20">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/basenji" />
 
                     <RadioButton
                         android:id="@+id/radioButton9"
@@ -123,7 +142,7 @@
                 <TextView
                     android:id="@+id/textView23"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     android:text="TextView"
@@ -138,6 +157,12 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/basset_bleu_de_gascogne" />
 
                     <RadioButton
                         android:id="@+id/radioButton13"
@@ -156,7 +181,7 @@
                 <TextView
                     android:id="@+id/textView24"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
                     android:layout_marginTop="10dp"
                     android:text="TextView"
@@ -171,6 +196,12 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/beagle" />
 
                     <RadioButton
                         android:id="@+id/radioButton17"

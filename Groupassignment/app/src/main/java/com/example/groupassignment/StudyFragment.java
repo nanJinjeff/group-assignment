@@ -40,14 +40,8 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_study, container, false);
 
-
         searchView = view.findViewById(R.id.searchView);
-
         searchView.setSubmitButtonEnabled(true);
-
-        recyclerView1 = view.findViewById(R.id.recyclerView1);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-        recyclerView1.setLayoutManager(linearLayoutManager);
 
         final String url = "https://api.TheDogApi.com/v1/breeds?";
         final RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
@@ -72,6 +66,9 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                 insertDogAsyncTask.setDelegate(studyFragment);
                 insertDogAsyncTask.execute(dogArray);
 
+                recyclerView1 = view.findViewById(R.id.recyclerView1);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+                recyclerView1.setLayoutManager(linearLayoutManager);
                 DogViewAdapter catViewAdapter = new DogViewAdapter(dogDB.dogDao().getAllDogs());
                 recyclerView1.setAdapter(catViewAdapter);
 

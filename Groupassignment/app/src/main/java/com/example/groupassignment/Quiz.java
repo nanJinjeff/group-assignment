@@ -6,21 +6,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+
+
 public class Quiz extends AppCompatActivity {
 
-
     Button button5;
+    TextView textView7,textView8, textView20, textView23, textView24;
     int[] score = new int[5];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz);
 
+        textView7 = findViewById(R.id.textView7);
+        textView8 = findViewById(R.id.textView8);
+        textView20 = findViewById(R.id.textView20);
+        textView23 = findViewById(R.id.textView23);
+        textView24 = findViewById(R.id.textView24);
+
+        textView7.setText("which dog's name is Affenpinshcher");
         RadioGroup radioGroup1 = findViewById(R.id.radioGroup);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -43,6 +53,7 @@ public class Quiz extends AppCompatActivity {
                 }
             }
         });
+        textView8.setText("which dog's name is Alapaha_Blue_Blood_Building");
         RadioGroup radioGroup2 = findViewById(R.id.radioGroup2);
         radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -65,6 +76,7 @@ public class Quiz extends AppCompatActivity {
                 }
             }
         });
+        textView20.setText("which dog's name is American_Bulldog");
         RadioGroup radioGroup3 = findViewById(R.id.radioGroup3);
         radioGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -87,6 +99,7 @@ public class Quiz extends AppCompatActivity {
                 }
             }
         });
+        textView23.setText("which dog's name is American_Eskimo_Dog_Miniature");
         RadioGroup radioGroup4 = findViewById(R.id.radioGroup4);
         radioGroup4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -109,6 +122,7 @@ public class Quiz extends AppCompatActivity {
                 }
             }
         });
+        textView24.setText("which dog's name is Australian_Terrier");
         RadioGroup radioGroup5 = findViewById(R.id.radioGroup5);
         radioGroup5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

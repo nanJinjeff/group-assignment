@@ -33,16 +33,23 @@ public class DogDescription extends AppCompatActivity{
     ImageView imageView3;
     Button button, button6;
     String urlImage;
-    String dogName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dog_description);
 
-         Intent intent = getIntent();
-         int dogNum = intent.getIntExtra("dogNum", 0);
-         String dogName = intent.getStringExtra("dogName");
+        Intent intent = getIntent();
+        final int dogNum = intent.getIntExtra("dogNum", 0);
+        final String dogName = intent.getStringExtra("dogName");
+
+        final QuestionOfDogDatabase questionDatabase = Room.databaseBuilder(this, QuestionOfDogDatabase.class, "database_question").allowMainThreadQueries()
+                .build();
+
+        QuestionOfDog questionOfDog = new QuestionOfDog();
+        questionOfDog.setDogId(dogNum);
+        questionOfDog.setDogName(dogName);
+        questionDatabase.getQuestionOfDogDao().insertQuestionOfDog(questionOfDog);
 
         imageView3 = findViewById(R.id.imageView3);
         textView9 = findViewById(R.id.textView9);
@@ -71,21 +78,29 @@ public class DogDescription extends AppCompatActivity{
             }
         });
 
-        DogDatabase dogDB = Room.databaseBuilder(this, DogDatabase.class, "database_dog").allowMainThreadQueries()
+        final DogDatabase dogDB = Room.databaseBuilder(this, DogDatabase.class, "database_dog").allowMainThreadQueries()
                 .build();
 
-                textView9.setText( dogDB.dogDao().getAllDogs().get(dogNum).getName());
-                if(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin() == null){
-                    textView13.setText("unknown");
-                }else {
-                    textView13.setText(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin());
-                }
-                textView15.setText( dogDB.dogDao().getAllDogs().get(dogNum).getLife_span());
-                textView11.setText( dogDB.dogDao().getAllDogs().get(dogNum).getBred_for());
-                textView17.setText( dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group());
-                textView19.setText( dogDB.dogDao().getAllDogs().get(dogNum).getTemperament());
+        textView9.setText(dogDB.dogDao().getAllDogs().get(dogNum).getName());
 
-        final String search = "https://en.wikipedia.org/wiki/"+ dogName;
+        if (dogDB.dogDao().getAllDogs().get(dogNum).getOrigin() == null) {
+            textView13.setText("unknown");
+        } else {
+            textView13.setText(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin());
+        }
+
+        textView15.setText(dogDB.dogDao().getAllDogs().get(dogNum).getLife_span());
+        textView11.setText(dogDB.dogDao().getAllDogs().get(dogNum).getBred_for());
+
+        if(dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group() == null){
+            textView17.setText("unknown");
+        }else {
+            textView17.setText(dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group());
+        }
+
+        textView19.setText(dogDB.dogDao().getAllDogs().get(dogNum).getTemperament());
+
+        final String search = "https://en.wikipedia.org/wiki/" + dogName;
         button6.setText(search);
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,30 +115,29 @@ public class DogDescription extends AppCompatActivity{
 
         Intent intent1 = getIntent();
         String urlID = String.valueOf(intent1.getIntExtra("urlID", 0));
-        urlImage = "https://api.TheDogApi.com/v1/images/search?breed_ids="+urlID;
+        urlImage = "https://api.TheDogApi.com/v1/images/search?breed_ids=" + urlID;
 
-         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
-             @Override
-             public void onResponse(String response) {
-                 final Gson gson = new Gson();
-                 DogImage[] objectsArrayCatImage = gson.fromJson(response, DogImage[].class);
-                 List<DogImage> objectsImageList = Arrays.asList(objectsArrayCatImage);
-
-                 if (objectsImageList.get(0).getUrl() != null) {
-                     Glide.with(getApplicationContext()).load(objectsImageList.get(0).getUrl()).into(imageView3);
-                 }
-             }
-         };
-
-             Response.ErrorListener errorListener1 = new Response.ErrorListener() {
-                 @Override
-                 public void onErrorResponse(VolleyError error) {
-                     System.out.println("The request failed.");
-                 }
-             };
-
-             StringRequest stringRequest1 = new StringRequest(Request.Method.GET, urlImage, responseListener1, errorListener1);
-             requestQueue.add(stringRequest1);
-
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                final Gson gson = new Gson();
+                DogImage[] objectsArrayCatImage = gson.fromJson(response, DogImage[].class);
+                List<DogImage> objectsImageList = Arrays.asList(objectsArrayCatImage);
+                    try {
+                        questionDatabase.getQuestionOfDogDao().setDodImage(objectsImageList.get(0).getUrl(), dogNum);
+                        Glide.with(getApplicationContext()).load(objectsImageList.get(0).getUrl()).into(imageView3);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+        };
+        Response.ErrorListener errorListener1 = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("The request failed.");
+            }
+        };
+        StringRequest stringRequest1 = new StringRequest(Request.Method.GET, urlImage, responseListener1, errorListener1);
+        requestQueue.add(stringRequest1);
+    }
          }
-}

@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.groupassignment.R;
+
 public class ScoreViewHolder extends RecyclerView.ViewHolder {
 
     TextView textView4;
