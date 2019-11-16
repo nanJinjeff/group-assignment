@@ -28,7 +28,7 @@
     <string name="trueChoice">true</string>
     <string name="falseChoice">false</string>
     <string name="share">Share</string>
-    <string name="random5questons">please identify dog name</string>
+    <string name="random5questons">you must have study some dogs before doing this quiz3</string>
     <string name="submittogetscore">submit to get score</string>
     <string name="totalmark">Total</string>
     <string name="difficult">Difficult Score</string>
