@@ -81,24 +81,24 @@ public class DogDescription extends AppCompatActivity{
         final DogDatabase dogDB = Room.databaseBuilder(this, DogDatabase.class, "database_dog").allowMainThreadQueries()
                 .build();
 
-        textView9.setText(dogDB.dogDao().getAllDogs().get(dogNum).getName());
+        textView9.setText(dogDB.dogDao().findDogById(dogNum).getName());
 
-        if (dogDB.dogDao().getAllDogs().get(dogNum).getOrigin() == null) {
+        if (dogDB.dogDao().findDogById(dogNum).getOrigin() == null) {
             textView13.setText("unknown");
         } else {
-            textView13.setText(dogDB.dogDao().getAllDogs().get(dogNum).getOrigin());
+            textView13.setText(dogDB.dogDao().findDogById(dogNum).getOrigin());
         }
 
-        textView15.setText(dogDB.dogDao().getAllDogs().get(dogNum).getLife_span());
-        textView11.setText(dogDB.dogDao().getAllDogs().get(dogNum).getBred_for());
+        textView15.setText(dogDB.dogDao().findDogById(dogNum).getLife_span());
+        textView11.setText(dogDB.dogDao().findDogById(dogNum).getBred_for());
 
-        if(dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group() == null){
+        if(dogDB.dogDao().findDogById(dogNum).getBreed_group() == null){
             textView17.setText("unknown");
         }else {
-            textView17.setText(dogDB.dogDao().getAllDogs().get(dogNum).getBreed_group());
+            textView17.setText(dogDB.dogDao().findDogById(dogNum).getBreed_group());
         }
 
-        textView19.setText(dogDB.dogDao().getAllDogs().get(dogNum).getTemperament());
+        textView19.setText(dogDB.dogDao().findDogById(dogNum).getTemperament());
 
         final String search = "https://en.wikipedia.org/wiki/" + dogName;
         button6.setText(search);

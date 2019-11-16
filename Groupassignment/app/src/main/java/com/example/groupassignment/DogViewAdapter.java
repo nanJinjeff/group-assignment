@@ -37,7 +37,7 @@ public class DogViewAdapter extends RecyclerView.Adapter<DogViewHolder>   {
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DogDescription.class);
-                intent.putExtra("dogNum", position);
+                intent.putExtra("dogNum", dog_List.get(position).getId());
                 intent.putExtra("dogName", dog_List.get(position).getName());
                 int urlDogImageID = dog_List.get(position).getId();
                 intent.putExtra("urlID",urlDogImageID);
