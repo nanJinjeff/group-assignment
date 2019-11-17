@@ -55,12 +55,14 @@ public class LevelFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int totalScore = 0;
-                for(int i = 0; i < scoreDatabase.getScoreDao().getAllScore().size(); i++){
+                int timesDifficult = 0;
+                for(int i = 0 ; i < scoreDatabase.getScoreDao().getAllScore().size(); i++){
                     if(scoreDatabase.getScoreDao().getAllScore().get(i).getQuestiontype().equals("Fill blank")){
                         totalScore = scoreDatabase.getScoreDao().getAllScore().get(i).getScore() + totalScore;
+                        timesDifficult++;
                     }
                 }
-                textView27.setText("total mark is " + totalScore + ", you have studied " + questionDatabase.getQuestionOfDogDao().getAllQuestionOfDog().size() + " (dog)");
+                textView27.setText("you have done difficult quiz "+ timesDifficult + " times," + " total mark is " + totalScore + ", you have studied " + questionDatabase.getQuestionOfDogDao().getAllQuestionOfDog().size() + " (dog)");
                 try {
                     scoreDatabase.getScoreDao().deleteAll(scoreDatabase.getScoreDao().getAllScore());
                 }catch (NullPointerException e){
