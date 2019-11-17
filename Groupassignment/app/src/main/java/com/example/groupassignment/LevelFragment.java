@@ -40,6 +40,9 @@ public class LevelFragment extends Fragment {
         final ScoreDatabase scoreDatabase = Room.databaseBuilder(view.getContext(), ScoreDatabase.class, "database_score").allowMainThreadQueries()
                 .build();
 
+        final QuestionOfDogDatabase questionDatabase = Room.databaseBuilder(view.getContext(), QuestionOfDogDatabase.class, "database_question").allowMainThreadQueries()
+                .build();
+
         recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -58,7 +61,7 @@ public class LevelFragment extends Fragment {
                         totalScore = scoreList.get(i).getScore() + totalScore;
                     }
                 }
-                textView27.setText(String.valueOf(totalScore));
+                textView27.setText("total mark is " + totalScore + ", you have studied " + questionDatabase.getQuestionOfDogDao().getAllQuestionOfDog().size() + " (dog)");
             }
         });
 
