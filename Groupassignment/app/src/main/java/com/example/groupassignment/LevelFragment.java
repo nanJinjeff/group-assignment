@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -54,14 +55,17 @@ public class LevelFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int totalScore = 0;
-                List<Score> scoreList = scoreDatabase.getScoreDao().getAllScore();
-
-                for(int i = 0; i < scoreList.size(); i++){
-                    if(scoreList.get(i).getQuestiontype().equals("Fill blank")){
-                        totalScore = scoreList.get(i).getScore() + totalScore;
+                for(int i = 0; i < scoreDatabase.getScoreDao().getAllScore().size(); i++){
+                    if(scoreDatabase.getScoreDao().getAllScore().get(i).getQuestiontype().equals("Fill blank")){
+                        totalScore = scoreDatabase.getScoreDao().getAllScore().get(i).getScore() + totalScore;
                     }
                 }
                 textView27.setText("total mark is " + totalScore + ", you have studied " + questionDatabase.getQuestionOfDogDao().getAllQuestionOfDog().size() + " (dog)");
+                try {
+                    scoreDatabase.getScoreDao().deleteAll(scoreDatabase.getScoreDao().getAllScore());
+                }catch (NullPointerException e){
+                   e.getMessage();
+                }
             }
         });
 
