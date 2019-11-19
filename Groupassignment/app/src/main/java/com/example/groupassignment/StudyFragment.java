@@ -48,6 +48,8 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
 
         final StudyFragment studyFragment = this;
 
+
+
         final Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -69,8 +71,9 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                 recyclerView1 = view.findViewById(R.id.recyclerView1);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
                 recyclerView1.setLayoutManager(linearLayoutManager);
-                DogViewAdapter catViewAdapter = new DogViewAdapter(dogDB.dogDao().getAllDogs());
-                recyclerView1.setAdapter(catViewAdapter);
+
+                DogViewAdapter dogViewAdapter = new DogViewAdapter(dogDB.dogDao().getAllDogs());
+                recyclerView1.setAdapter(dogViewAdapter);
 
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override

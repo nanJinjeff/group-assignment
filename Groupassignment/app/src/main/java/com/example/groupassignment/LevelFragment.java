@@ -1,6 +1,7 @@
 package com.example.groupassignment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,10 +38,8 @@ public class LevelFragment extends Fragment {
 
         textView27 = view.findViewById(R.id.textView27);
 
-
         final ScoreDatabase scoreDatabase = Room.databaseBuilder(view.getContext(), ScoreDatabase.class, "database_score").allowMainThreadQueries()
                 .build();
-
         final QuestionOfDogDatabase questionDatabase = Room.databaseBuilder(view.getContext(), QuestionOfDogDatabase.class, "database_question").allowMainThreadQueries()
                 .build();
 
@@ -75,12 +74,12 @@ public class LevelFragment extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.facebook.com/"));
-                startActivity(intent);
+                Context context = v.getContext();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                context.startActivity(intent);
             }
         });
-
         return view;
     }
 
