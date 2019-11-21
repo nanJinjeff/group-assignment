@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface QuestionOfDogDao {
 
-    @Query("SELECT * FROM QuestionOfDog")
+    @Query("SELECT * FROM QuestionOfDog ORDER BY random() Limit 10")
     List<QuestionOfDog> getAllQuestionOfDog();
 
     @Query("UPDATE QuestionOfDog SET dogImage = :imageUrl WHERE dogId = :dogId")

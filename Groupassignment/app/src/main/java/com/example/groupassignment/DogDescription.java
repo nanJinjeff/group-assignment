@@ -1,5 +1,6 @@
 package com.example.groupassignment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class DogDescription extends AppCompatActivity{
     ImageView imageView3;
     Button button, button6;
     String urlImage;
+    Button video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class DogDescription extends AppCompatActivity{
         button6 = findViewById(R.id.button6);
         editText24 = findViewById(R.id.editText24);
         button = findViewById(R.id.button);
+        video = findViewById(R.id.btn_watchvideo);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +79,18 @@ public class DogDescription extends AppCompatActivity{
 
                 String notify = "you have added a Note";
                 Toast.makeText(v.getContext(), notify, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent1 = new Intent(context, DogVideo.class);
+                intent1.putExtra("Dogname",dogName);
+                context.startActivity(intent1);
+
+
             }
         });
 

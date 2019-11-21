@@ -46,6 +46,15 @@
                 android:paddingTop="20dp"
                 app:srcCompat="@android:drawable/ic_menu_gallery" />
 
+            <Button
+                android:id="@+id/btn_watchvideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/pink"
+                android:text="@string/watchvideo"/>
+
+
+
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
@@ -262,7 +271,7 @@
                     android:layout_width="411dp"
                     android:layout_height="270dp"
                     android:layout_marginBottom="128dp"
-                    android:text="EditText"
+                    android:hint="Please type your note here"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

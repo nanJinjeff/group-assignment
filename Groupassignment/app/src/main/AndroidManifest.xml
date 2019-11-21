@@ -20,7 +20,8 @@
         <activity android:name=".Quiz"></activity>
         <activity android:name=".GetTheScore"></activity>
         <activity android:name=".DogDescription"></activity>
-        <activity android:name=".Quiz3"></activity>
+        <activity android:name=".DogVideo"></activity>
+        <activity android:name=".Quiz3_RecyclerView"></activity>
 
     </application>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>

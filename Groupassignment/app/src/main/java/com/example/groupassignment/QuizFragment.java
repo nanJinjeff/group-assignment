@@ -46,7 +46,7 @@ public class QuizFragment extends Fragment {
         imageButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(v.getContext(), Quiz3.class);
+                Intent intent3 = new Intent(v.getContext(), Quiz3_RecyclerView.class);
                 v.getContext().startActivity(intent3);
             }
         });

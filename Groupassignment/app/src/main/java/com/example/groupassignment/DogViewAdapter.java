@@ -5,15 +5,32 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+import android.widget.ImageView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.groupassignment.Dog;
 import com.example.groupassignment.DogDescription;
 import com.example.groupassignment.R;
+import com.google.gson.Gson;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DogViewAdapter extends RecyclerView.Adapter<DogViewHolder>   {
+
+    private String stringurl;
+    private Integer image_id;
+    //private boolean finish=true;
+
 
     public List<Dog> dog_List;
 
@@ -24,7 +41,7 @@ public class DogViewAdapter extends RecyclerView.Adapter<DogViewHolder>   {
     @Override
     public DogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_dog, parent, false);
-        DogViewHolder holder = new DogViewHolder(view);
+        final DogViewHolder holder = new DogViewHolder(view);
         return holder;
     }
 
@@ -44,6 +61,10 @@ public class DogViewAdapter extends RecyclerView.Adapter<DogViewHolder>   {
                 context.startActivity(intent);
             }
         });
+
+
+
+
     }
 
     @Override
