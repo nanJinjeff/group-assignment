@@ -55,6 +55,12 @@ public class Quiz3_RecyclerView extends AppCompatActivity {
                 int score9 = sharedPreferences.getInt("score9", 0);
                 int score10 = sharedPreferences.getInt("score10", 0);
                 int totalScore = score1+score2+score3+score4+score5+score6+score7+score8+score9+score10;
+                ScoreDatabase scoreDatabase = Room.databaseBuilder(v.getContext(), ScoreDatabase.class, "database_score").allowMainThreadQueries()
+                        .build();
+                Score scoreData = new Score();
+                scoreData.setScore(totalScore);
+                scoreData.setQuestiontype("Fill blank");
+                scoreDatabase.getScoreDao().insertScore(scoreData);
                 Intent intent1 = new Intent(v.getContext(), GetTheScore.class);
                 intent1.putExtra("score", totalScore);
                 v.getContext().startActivity(intent1);
