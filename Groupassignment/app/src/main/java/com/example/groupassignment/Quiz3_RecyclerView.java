@@ -61,6 +61,18 @@ public class Quiz3_RecyclerView extends AppCompatActivity {
                 scoreData.setScore(totalScore);
                 scoreData.setQuestiontype("Fill blank");
                 scoreDatabase.getScoreDao().insertScore(scoreData);
+
+                sharedPreferences.edit().putInt("score1",0).commit();
+                sharedPreferences.edit().putInt("score2",0).commit();
+                sharedPreferences.edit().putInt("score3",0).commit();
+                sharedPreferences.edit().putInt("score4",0).commit();
+                sharedPreferences.edit().putInt("score5",0).commit();
+                sharedPreferences.edit().putInt("score6",0).commit();
+                sharedPreferences.edit().putInt("score7",0).commit();
+                sharedPreferences.edit().putInt("score8",0).commit();
+                sharedPreferences.edit().putInt("score9",0).commit();
+                sharedPreferences.edit().putInt("score10",0).commit();
+
                 Intent intent1 = new Intent(v.getContext(), GetTheScore.class);
                 intent1.putExtra("score", totalScore);
                 v.getContext().startActivity(intent1);
