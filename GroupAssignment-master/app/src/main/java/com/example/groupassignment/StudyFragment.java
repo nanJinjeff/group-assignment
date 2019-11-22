@@ -26,14 +26,9 @@ import java.util.Arrays;
 import java.util.List;
 
 //implement AsyncTaskDelegate to use the database.
-public class StudyFragment extends Fragment implements AsyncTaskDelegate {
+public class StudyFragment extends Fragment implements AsyncTaskDelegate,AsyncTaskGetDelegate {
     RecyclerView recyclerView1;
     public SearchView searchView;
-
-    @Override
-    public void handleTaskResult(String result){
-        Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +60,8 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                 final DogDatabase dogDB = Room.databaseBuilder(view.getContext(), DogDatabase.class, "database_dog").allowMainThreadQueries()
                         .build();
 
+
+
                 //use the insertDogAsyncTask to set the delegate, database and put the array in insertDogAsyncTask.
                 InsertDogAsyncTask insertDogAsyncTask = new InsertDogAsyncTask();
                 insertDogAsyncTask.setDatabase(dogDB);
@@ -75,8 +72,7 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                 recyclerView1 = view.findViewById(R.id.recyclerView1);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
                 recyclerView1.setLayoutManager(linearLayoutManager);
-                DogViewAdapter dogViewAdapter = new DogViewAdapter(dogDB.dogDao().getAllDogs());
-                recyclerView1.setAdapter(dogViewAdapter);
+
 
                 //use search view to select item which is in the recyclerView.
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -110,6 +106,24 @@ public class StudyFragment extends Fragment implements AsyncTaskDelegate {
                 requestQueue.add(stringRequest);
 
             return view;
+    }
+
+
+    @Override
+    public void handleTaskResult(String result){
+        Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
+        DogDatabase dogDB = Room.databaseBuilder(getContext(), DogDatabase.class, "database_dog").allowMainThreadQueries()
+                .build();
+        GetDogAsyncTask getDogAsyncTask = new GetDogAsyncTask();
+        getDogAsyncTask.setDatabase(dogDB);
+        getDogAsyncTask.setDelegate(this);
+        getDogAsyncTask.execute();
+    }
+
+    @Override
+    public void handleTaskGetResult(List<Dog> dogs){
+        DogViewAdapter dogViewAdapter = new DogViewAdapter(dogs);
+        recyclerView1.setAdapter(dogViewAdapter);
     }
 
     //create a method to filter the searched item
